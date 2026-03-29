@@ -1,3 +1,12 @@
+# Custom
+.env
+.env.example
+/data
+/reports
+/fonts
+*.png
+/temp_reports
+*.pdf
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

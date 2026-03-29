@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Analytics Report</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                cat: {
+                  base: '#eff1f5',
+                  mantle: '#e6e9ef',
+                  crust: '#dce0e8',
+                  surface0: '#ccd0da',
+                  surface1: '#bcc0cc',
+                  surface2: '#acb0be',
+                  text: '#4c4f69',
+                  subtext1: '#5c5f77',
+                  subtext0: '#6c6f85',
+                  blue: '#1e66f5',
+                  lavender: '#7287fd',
+                  sapphire: '#209fb5',
+                  teal: '#179299',
+                  green: '#40a02b',
+                  yellow: '#df8e1d',
+                  peach: '#fe640b',
+                  maroon: '#e64553',
+                  red: '#d20f39',
+                  mauve: '#8839ef',
+                  pink: '#ea76cb',
+                }
+              }
+            }
+          }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #eff1f5;
+            color: #4c4f69;
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Essential print styling to handle page breaks smoothly */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-color: #eff1f5 !important;
+            }
+            .chart-card {
+                /* strictly prevent cutting halfway through the chart */
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
+
+        /* Subtle grid pattern for light background */
+        .bg-grid {
+            background-image: linear-gradient(to right, #ccd0da 1px, transparent 1px),
+                              linear-gradient(to bottom, #ccd0da 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+
+<body class="p-5 bg-grid">
+
+    <!-- Header & Profile Section (Condensed Margins) -->
+    <div class="bg-cat-mantle rounded-[2rem] shadow-sm border border-cat-surface0 p-5 mb-5 flex items-center justify-between overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-cat-pink/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+        <div class="relative z-10">
+            <h1 class="text-3xl font-extrabold text-cat-mauve tracking-tight mb-1">{{ baby_name }}'s Report</h1>
+            <p class="text-sm text-cat-subtext0 font-medium mb-4">Daily Analytics & Health Summary</p>
+            
+            <div class="flex items-center space-x-6 text-sm font-semibold bg-cat-surface0/30 border border-cat-surface1 px-4 py-2 rounded-2xl">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-cat-sapphire" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                    <span class="text-cat-subtext0 mr-1">DOB:</span> 
+                    <span class="text-cat-text">{{ baby_dob }}</span>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-cat-sapphire" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                    <span class="text-cat-subtext0 mr-1">Age:</span> 
+                    <span class="text-cat-text">{{ baby_age }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="relative z-10 text-right shrink-0">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cat-crust to-cat-mantle rounded-3xl shadow-sm mb-2 border border-cat-surface1 text-3xl">
+                <!-- New Girl SVG in Pink -->
+                <svg class="w-8 h-8 text-cat-pink" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M228,128A100,100,0,1,1,128,28,100.11,100.11,0,0,1,228,128ZM128,52a75.75,75.75,0,0,0-58.82,28.27A60,60,0,0,1,128,156a60,60,0,0,1,58.82-75.73A75.75,75.75,0,0,0,128,52Zm62.2,46.07C184,142.12,159.26,176,128,176S72,142.12,65.8,98.07a75.92,75.92,0,0,0,124.4,0ZM112,120a8,8,0,1,0-8-8A8,8,0,0,0,112,120Zm48-16a8,8,0,1,0,8,8A8,8,0,0,0,160,104Zm-32,52h0a20,20,0,0,1,0-40,20,20,0,0,1,0,40Z"></path>
+                </svg>
+            </div>
+            <p class="text-[9px] text-cat-subtext1 font-bold tracking-widest uppercase mb-1">Generated On</p>
+            <p class="text-sm text-cat-text font-bold">{{ today_date }}</p>
+        </div>
+    </div>
+
+    <!-- Top KPIs Row (Pure Text layout) -->
+    <div class="mb-5">
+        <h3 class="text-xl font-extrabold tracking-tight text-cat-text mb-3 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-cat-lavender" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+            Velocity Board
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            
+            <!-- Today (Crust Card) -->
+            <div class="relative bg-cat-crust rounded-[1.2rem] p-4 shadow-sm overflow-hidden group border border-cat-surface0">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-cat-blue/20 rounded-full blur-xl"></div>
+                <h4 class="text-[12px] font-bold text-cat-subtext1 tracking-widest uppercase mb-3 flex items-center border-b border-cat-surface0 pb-2">
+                    <span class="w-2 h-2 rounded-full bg-cat-green mr-2 animate-pulse"></span>
+                    Today
+                </h4>
+                
+                <div class="relative z-10 flex flex-col space-y-1.5 text-sm font-semibold text-cat-subtext1">
+                    <div class="flex justify-between">
+                        <span>Total milk:</span>
+                        <span class="text-cat-text">{{ today_feed }} ml</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Total Diaper:</span>
+                        <span class="text-cat-text">{{ today_diapers }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Temperature:</span>
+                        <span class="text-cat-text">{{ today_temp }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Weight:</span>
+                        <span class="text-cat-text">{{ today_weight }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yesterday Card -->
+            <div class="relative bg-cat-crust rounded-[1.2rem] p-4 shadow-sm border border-cat-surface0 overflow-hidden">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-cat-peach/20 rounded-full blur-xl"></div>
+                <h4 class="text-[12px] font-bold text-cat-subtext1 tracking-widest uppercase mb-3 flex items-center border-b border-cat-surface0 pb-2">
+                    <svg class="w-3 h-3 mr-1 text-cat-peach" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Yesterday
+                </h4>
+                
+                <div class="relative z-10 flex flex-col space-y-1.5 text-sm font-semibold text-cat-subtext1">
+                    <div class="flex justify-between">
+                        <span>Total milk:</span>
+                        <span class="text-cat-text">{{ yesterday_feed }} ml</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Total Diaper:</span>
+                        <span class="text-cat-text">{{ yesterday_diapers }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Temperature:</span>
+                        <span class="text-cat-text">{{ yesterday_temp }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Weight:</span>
+                        <span class="text-cat-text">{{ yesterday_weight }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-Day Average Card -->
+            <div class="relative bg-cat-crust rounded-[1.2rem] p-4 shadow-sm border border-cat-surface0 overflow-hidden">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-cat-green/20 rounded-full blur-xl"></div>
+                <h4 class="text-[12px] font-bold text-cat-subtext1 tracking-widest uppercase mb-3 flex items-center border-b border-cat-surface0 pb-2">
+                    <svg class="w-3 h-3 mr-1 text-cat-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002-2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    3-Day Avg
+                </h4>
+                
+                <div class="relative z-10 flex flex-col space-y-1.5 text-sm font-semibold text-cat-subtext1">
+                    <div class="flex justify-between">
+                        <span>Total milk:</span>
+                        <span class="text-cat-text">{{ avg_3_feed }} ml</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Total Diaper:</span>
+                        <span class="text-cat-text">{{ avg_3_diaper }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Temperature:</span>
+                        <span class="text-cat-text">{{ avg_3_temp }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Weight:</span>
+                        <span class="text-cat-text">{{ avg_3_weight }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="flex flex-col space-y-4">
+        
+        {% if feed_chart_b64 %}
+        <div class="chart-card bg-cat-base rounded-[1.5rem] shadow-sm border border-cat-surface0 p-4 relative overflow-hidden">
+            <h3 class="text-lg font-bold text-cat-text mb-2 tracking-tight flex items-center">
+                <svg class="w-5 h-5 mr-3 text-cat-pink" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
+                Feeding Volume Trends
+            </h3>
+            <img src="data:image/png;base64,{{ feed_chart_b64 }}" alt="Feed Chart" class="w-full h-auto rounded-xl">
+        </div>
+        {% endif %}
+
+        {% if diaper_chart_b64 %}
+        <div class="chart-card bg-cat-base rounded-[1.5rem] shadow-sm border border-cat-surface0 p-4 relative overflow-hidden">
+            <h3 class="text-lg font-bold text-cat-text mb-2 tracking-tight flex items-center">
+                <svg class="w-5 h-5 mr-3 text-cat-yellow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a2 2 0 00-2 2v1.5a1.5 1.5 0 01-3 0V4a2 2 0 10-4 0v1.5a1.5 1.5 0 01-3 0V4a2 2 0 10-4 0v1.5a1.5 1.5 0 01-3 0V4a2 2 0 10-4 0v1.5a1.5 1.5 0 01-3 0V4a2 2 0 00-2-2z" clip-rule="evenodd"></path></svg>
+                Diaper Output History
+            </h3>
+            <img src="data:image/png;base64,{{ diaper_chart_b64 }}" alt="Diaper Chart" class="w-full h-auto rounded-xl">
+        </div>
+        {% endif %}
+
+        {% if temp_chart_b64 %}
+        <div class="chart-card bg-cat-base rounded-[1.5rem] shadow-sm border border-cat-surface0 p-4 relative overflow-hidden">
+            <h3 class="text-lg font-bold text-cat-text mb-2 tracking-tight flex items-center">
+                <svg class="w-5 h-5 mr-3 text-cat-red" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a3 3 0 00-3 3v7.5a3 3 0 106 0V5a3 3 0 00-3-3zm1 10.5V5a1 1 0 10-2 0v7.5a1 1 0 102 0z" clip-rule="evenodd"></path></svg>
+                Body Temperature Analysis
+            </h3>
+            <img src="data:image/png;base64,{{ temp_chart_b64 }}" alt="Temp Chart" class="w-full h-auto rounded-xl">
+        </div>
+        {% endif %}
+
+        {% if growth_chart_b64 %}
+        <div class="chart-card bg-cat-base rounded-[1.5rem] shadow-sm border border-cat-surface0 p-4 relative overflow-hidden">
+            <h3 class="text-lg font-bold text-cat-text mb-2 tracking-tight flex items-center">
+                <svg class="w-5 h-5 mr-3 text-cat-blue" fill="currentColor" viewBox="0 0 20 20"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                Growth & Weight Tracker
+            </h3>
+            <img src="data:image/png;base64,{{ growth_chart_b64 }}" alt="Growth Chart" class="w-full h-auto rounded-xl">
+        </div>
+        {% endif %}
+
+        {% for heatmap_b64 in activity_heatmaps %}
+        <div class="chart-card bg-cat-base rounded-[1.5rem] shadow-sm border border-cat-surface0 p-4 relative overflow-hidden">
+            <h3 class="text-lg font-bold text-cat-text mb-2 tracking-tight flex items-center">
+                <svg class="w-5 h-5 mr-3 text-cat-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                Activity Tracking Heatmap
+            </h3>
+            <img src="data:image/png;base64,{{ heatmap_b64 }}" alt="Heatmap Chart" class="w-full h-auto rounded-xl">
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-4 border-t border-cat-surface0 text-center pt-2 pb-1">
+        <p class="text-[9px] text-cat-subtext1 font-bold uppercase tracking-widest">Confidential Health Report</p>
+        <p class="text-[8px] text-cat-subtext0 mt-0.5">Rendered dynamically with Playwright & Catppuccin Latte Theme over 2 Pages.</p>
+    </div>
+
+</body>
+</html>
