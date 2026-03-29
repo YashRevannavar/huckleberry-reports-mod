@@ -1,20 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Optional, Dict
-from enums import ActivityType, FeedType
-
-@dataclass
-class ActivityRecord:
-    activity_type: ActivityType
-    start_time: datetime
-    end_time: Optional[datetime]
-    duration_minutes: Optional[float]
-    feed_type: FeedType
-    feed_amount_ml: Optional[float]
-    diaper_condition: str
-    temperature: Optional[float]
-    weight_kg: Optional[float]
-    notes: str
+from typing import Dict
 
 @dataclass
 class DailyKPIs:
